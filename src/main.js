@@ -29,7 +29,9 @@ fetchData(page)
     selectors.container.insertAdjacentHTML(
       'beforeend',
       createMarkup(data.results)
+      
     );
+    console.log(data);
 
     if (data.page < 500) {
       observer.observe(selectors.guard);
@@ -61,15 +63,15 @@ function createMarkup(arr) {
       let stars = '';
 
       for (let i = 0; i < fullStars; i++) {
-        stars += `<use href="./img/rating.svg#stars-full-star"></use>`;
+        stars += `<use href="https://anastasiiya1.github.io/pagination/img/rating.svg#stars-full-star"></use>`;
       }
 
       if (hasHalfStar) {
-        stars += `<use href="./img/rating.svg#stars-half-star"></use>`;
+        stars += `<use href="https://anastasiiya1.github.io/pagination/img/rating.svg#stars-half-star"></use>`;
       }
 
       for (let i = 0; i < emptyStars; i++) {
-        stars += `<use href="./img/rating.svg#stars-empty-star"></use>`;
+        stars += `<use href="https://anastasiiya1.github.io/pagination/img/rating.svg#stars-empty-star"></use>`;
       }
 
       return `
@@ -138,13 +140,16 @@ function handlePagination(entries, observer) {
 
 selectors.container.addEventListener('click', openCard);
 
-function openCard(event){
+async function openCard(event){
     if(event.target === event.currentTarget){
         return;
     }
 
     const currentMovie = event.target.closest('.movie-card');
     const movieId = currentMovie.dataset.id;
+    const movie = await results.find(item => item.id === Number(movieId));
+    console.log(movie);
+
 
     
 
