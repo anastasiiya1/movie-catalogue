@@ -1,4 +1,6 @@
 import axios from 'axios';
+import * as basicLightbox from 'basiclightbox';
+
 
 const BASE_URL = 'https://api.themoviedb.org/3';
 const END_POINT = '/trending/movie/week';
@@ -133,3 +135,14 @@ function handlePagination(entries, observer) {
     }
   });
 }
+
+selectors.container.addEventListener('click', (event) => {
+    if (event.target.closest('.movie-card')){
+        const instance = basicLightbox.create(`
+      <h1>Dynamic Content</h1>
+      <p>You can set the content of the lightbox with JS.</p>
+    `);
+
+    instance.show();
+    }
+})
