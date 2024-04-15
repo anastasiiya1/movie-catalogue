@@ -61,15 +61,15 @@ function createMarkup(arr) {
       let stars = '';
 
       for (let i = 0; i < fullStars; i++) {
-        stars += `<use href="./img/rating.svg#stars-full-star"></use>`;
+        stars += `<use href="/img/rating.svg#stars-full-star"></use>`;
       }
 
       if (hasHalfStar) {
-        stars += `<use href="./img/rating.svg#stars-half-star"></use>`;
+        stars += `<use href="/img/rating.svg#stars-half-star"></use>`;
       }
 
       for (let i = 0; i < emptyStars; i++) {
-        stars += `<use href="./img/rating.svg#stars-empty-star"></use>`;
+        stars += `<use href="/img/rating.svg#stars-empty-star"></use>`;
       }
 
       return `
@@ -136,13 +136,11 @@ function handlePagination(entries, observer) {
   });
 }
 
-selectors.container.addEventListener('click', (event) => {
-    if (event.target.closest('.movie-card')){
-        const instance = basicLightbox.create(`
-      <h1>Dynamic Content</h1>
-      <p>You can set the content of the lightbox with JS.</p>
-    `);
+selectors.container.addEventListener('click', openCard);
 
-    instance.show();
+function openCard(event){
+    if(!event.currentTarget.contains('movie-card')){
+        return;
     }
-})
+
+}
