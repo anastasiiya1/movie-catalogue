@@ -61,15 +61,15 @@ function createMarkup(arr) {
       let stars = '';
 
       for (let i = 0; i < fullStars; i++) {
-        stars += `<use href="../img/rating.svg#stars-full-star"></use>`;
+        stars += `<use href="./img/rating.svg#stars-full-star"></use>`;
       }
 
       if (hasHalfStar) {
-        stars += `<use href="../img/rating.svg#stars-half-star"></use>`;
+        stars += `<use href="./img/rating.svg#stars-half-star"></use>`;
       }
 
       for (let i = 0; i < emptyStars; i++) {
-        stars += `<use href="../img/rating.svg#stars-empty-star"></use>`;
+        stars += `<use href="./img/rating.svg#stars-empty-star"></use>`;
       }
 
       return `
