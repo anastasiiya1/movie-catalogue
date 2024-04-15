@@ -54,47 +54,47 @@ async function fetchData(page = 1) {
 }
 
 function createMarkup(arr) {
-  return arr
-    .map(({ id, poster_path, original_title, release_date, vote_average }) => {
-      const fullStars = Math.floor(vote_average / 2);
-      const hasHalfStar = vote_average % 2 !== 0;
-      const emptyStars = 5 - Math.ceil(vote_average / 2);
-
-      let stars = '';
-
-      for (let i = 0; i < fullStars; i++) {
-        stars += `<use href="./img/rating.svg#stars-full-star"></use>`;
-      }
-
-      if (hasHalfStar) {
-        stars += `<use href="./img/rating.svg#stars-half-star"></use>`;
-      }
-
-      for (let i = 0; i < emptyStars; i++) {
-        stars += `<use href="./img/rating.svg#stars-empty-star"></use>`;
-      }
-
-      return `
-            <li class='movie-card' data-id='${id}'>
-              <img src='https://image.tmdb.org/t/p/w500${poster_path}' alt='${original_title}'>
-              <div class='movie-info'>
-                  <h2>${original_title}</h2>
-                  <p>Release date: ${release_date}</p>
-                  <p class="rating-container">
-                      <svg aria-hidden="true" focusable="false" class="rating">
-                          ${stars}
-                      </svg>
-                  </p>
-                  <span class='vote-average'>${
-                    Math.floor(vote_average * 10) / 10
-                  }</span>
-              </div>
-            </li>
-          `;
-    })
-    .join('');
-}
-
+    return arr
+      .map(({ id, poster_path, original_title, release_date, vote_average }) => {
+        const fullStars = Math.floor(vote_average / 2);
+        const hasHalfStar = vote_average % 2 !== 0;
+        const emptyStars = 5 - Math.ceil(vote_average / 2);
+  
+        let stars = '';
+  
+        for (let i = 0; i < fullStars; i++) {
+          stars += `<use href="#stars-full-star"></use>`;
+        }
+  
+        if (hasHalfStar) {
+          stars += `<use href="#stars-half-star"></use>`;
+        }
+  
+        for (let i = 0; i < emptyStars; i++) {
+          stars += `<use href="#stars-empty-star"></use>`;
+        }
+  
+        return `
+              <li class='movie-card' data-id='${id}'>
+                <img src='https://image.tmdb.org/t/p/w500${poster_path}' alt='${original_title}'>
+                <div class='movie-info'>
+                    <h2>${original_title}</h2>
+                    <p>Release date: ${release_date}</p>
+                    <p class="rating-container">
+                        <svg aria-hidden="true" focusable="false" class="rating">
+                            ${stars}
+                        </svg>
+                    </p>
+                    <span class='vote-average'>${
+                      Math.floor(vote_average * 10) / 10
+                    }</span>
+                </div>
+              </li>
+            `;
+      })
+      .join('');
+  }
+  
 // async function loadMore() {
 //   page += 1;
 
@@ -138,5 +138,6 @@ function handlePagination(entries, observer) {
   });
 }
 
-selectors.container.addEventListener('click', openCard);
+// selectors.container.addEventListener('click', openCard);
+
 

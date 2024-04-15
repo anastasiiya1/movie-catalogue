@@ -81,7 +81,7 @@ body{
   font-size: 1.2em;
   color: #777;
 }
-
+/* 
 use {
   &:nth-child(2) {
     transform: translate(20px);
@@ -95,13 +95,36 @@ use {
   &:nth-child(5) {
     transform: translate(80px);
   }
-}
+} */
+/* .icon {
+  display: inline-block;
+  width: 1em;
+  height: 1em;
+  stroke-width: 0;
+  stroke: currentColor;
+  fill: goldenrod;
+} */
 
 .rating {
-  display: block;
-  height: 20px;
-  margin: 0.75rem auto;
+  display: inline-block;
   width: 100px;
+  height: 18px;
+}
+
+.rating use:nth-child(2) {
+  transform: translate(20px);
+}
+
+.rating use:nth-child(3) {
+  transform: translate(40px);
+}
+
+.rating use:nth-child(4) {
+  transform: translate(60px);
+}
+
+.rating use:nth-child(5) {
+  transform: translate(80px);
 }
 
 .vote-average{
