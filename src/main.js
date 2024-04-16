@@ -15,6 +15,7 @@ const selectors = {
 selectors.container.addEventListener('click', openCard);
 
 let page = 1;
+let isModalOpen = false;
 
 let options = {
   root: null,
@@ -106,7 +107,7 @@ function handlePagination(entries, observer) {
         if (movie.page >= 500) {
           observer.unobserve(entry.target);
         }
-      } catch {
+      } catch (error) {
         alert(error.message);
       }
     }
@@ -118,16 +119,18 @@ async function openCard(event) {
     return;
   }
 
+
   console.log('ok');
 
   const movieCard = event.target.closest('.movie-card');
+
   const movieId = movieCard.dataset.id;
 
   const response = await fetchData(page);
-
   const selectedMovie = response.results.find(
     movie => movie.id === Number(movieId)
   );
+
   const poster = selectedMovie.backdrop_path;
   const title = selectedMovie.original_title;
   const rating = Math.floor(selectedMovie.vote_average * 10)/10;
@@ -143,4 +146,5 @@ async function openCard(event) {
   `);
 
   instance.show();
+  isModalOpen = true;
 }
