@@ -81,34 +81,12 @@ body{
   font-size: 1.2em;
   color: #777;
 }
-/* 
-use {
-  &:nth-child(2) {
-    transform: translate(20px);
-  }
-  &:nth-child(3) {
-    transform: translate(40px);
-  }
-  &:nth-child(4) {
-    transform: translate(60px);
-  }
-  &:nth-child(5) {
-    transform: translate(80px);
-  }
-} */
-/* .icon {
-  display: inline-block;
-  width: 1em;
-  height: 1em;
-  stroke-width: 0;
-  stroke: currentColor;
-  fill: goldenrod;
-} */
 
 .rating {
-  display: inline-block;
+  display: block;
+  height: 20px;
+  margin: 0.75rem auto;
   width: 100px;
-  height: 18px;
 }
 
 .rating use:nth-child(2) {
@@ -132,3 +110,16 @@ use {
   color: goldenrod;
 }
 
+.modal{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+
+  margin: 0 auto;
+  padding: 10px;
+  width: 50vw;
+  background-color: #201e1e;
+  border-radius: 10px;
+
+}

@@ -1,6 +1,6 @@
 import axios from 'axios';
-import * as basicLightbox from 'basiclightbox';
-
+import * as basicLightbox from "basiclightbox";
+import "basiclightbox/dist/basicLightbox.min.css";
 
 const BASE_URL = 'https://api.themoviedb.org/3';
 const END_POINT = '/trending/movie/week';
@@ -12,7 +12,7 @@ const selectors = {
   guard: document.querySelector('.js-guard'),
 };
 
-// selectors.loadBtn.addEventListener('click', loadMore);
+selectors.container.addEventListener('click', openCard);
 
 let page = 1;
 
@@ -29,17 +29,13 @@ fetchData(page)
     selectors.container.insertAdjacentHTML(
       'beforeend',
       createMarkup(data.results)
-      
     );
     console.log(data);
+
 
     if (data.page < 500) {
       observer.observe(selectors.guard);
     }
-
-    // if (data.page < data.total_pages) {
-    //   selectors.loadBtn.classList.toggle('load-more');
-    // }
   })
   .catch(error => console.log(error.message));
 
@@ -54,27 +50,27 @@ async function fetchData(page = 1) {
 }
 
 function createMarkup(arr) {
-    return arr
-      .map(({ id, poster_path, original_title, release_date, vote_average }) => {
-        const fullStars = Math.floor(vote_average / 2);
-        const hasHalfStar = vote_average % 2 !== 0;
-        const emptyStars = 5 - Math.ceil(vote_average / 2);
-  
-        let stars = '';
-  
-        for (let i = 0; i < fullStars; i++) {
-          stars += `<use href="#stars-full-star"></use>`;
-        }
-  
-        if (hasHalfStar) {
-          stars += `<use href="#stars-half-star"></use>`;
-        }
-  
-        for (let i = 0; i < emptyStars; i++) {
-          stars += `<use href="#stars-empty-star"></use>`;
-        }
-  
-        return `
+  return arr
+    .map(({ id, poster_path, original_title, release_date, vote_average }) => {
+      const fullStars = Math.floor(vote_average / 2);
+      const hasHalfStar = vote_average % 2 !== 0;
+      const emptyStars = 5 - Math.ceil(vote_average / 2);
+
+      let stars = '';
+
+      for (let i = 0; i < fullStars; i++) {
+        stars += `<use href="#stars-full-star"></use>`;
+      }
+
+      if (hasHalfStar) {
+        stars += `<use href="#stars-half-star"></use>`;
+      }
+
+      for (let i = 0; i < emptyStars; i++) {
+        stars += `<use href="#stars-empty-star"></use>`;
+      }
+
+      return `
               <li class='movie-card' data-id='${id}'>
                 <img src='https://image.tmdb.org/t/p/w500${poster_path}' alt='${original_title}'>
                 <div class='movie-info'>
@@ -91,30 +87,9 @@ function createMarkup(arr) {
                 </div>
               </li>
             `;
-      })
-      .join('');
-  }
-  
-// async function loadMore() {
-//   page += 1;
-
-//   selectors.loadBtn.disabled = true;
-
-//   try {
-//     const data = await fetchData(page);
-//     selectors.container.insertAdjacentHTML(
-//       'beforeend',
-//       createMarkup(data.results)
-//     );
-//     selectors.loadBtn.disabled = false;
-
-//     if (data.page >= 500) {
-//       selectors.loadBtn.classList.toggle('load-more');
-//     }
-//   } catch (error) {
-//     alert(error.message);
-//   }
-// }
+    })
+    .join('');
+}
 
 function handlePagination(entries, observer) {
   entries.forEach(async entry => {
@@ -128,8 +103,8 @@ function handlePagination(entries, observer) {
           createMarkup(movie.results)
         );
 
-        if (movie.page >=500){
-            observer.unobserve(entry.target)
+        if (movie.page >= 500) {
+          observer.unobserve(entry.target);
         }
       } catch {
         alert(error.message);
@@ -138,6 +113,32 @@ function handlePagination(entries, observer) {
   });
 }
 
-// selectors.container.addEventListener('click', openCard);
+async function openCard(event) {
+  if(event.target === event.currentTarget){
+    return;
+  }
 
+  const movieCard = event.target.closest('.movie-card');
+  const movieId = movieCard.dataset.id;
 
+  const response = await fetchData(page);
+
+  const selectedMovie = response.results.find(
+    movie => movie.id === Number(movieId)
+  );
+  const poster = selectedMovie.backdrop_path;
+  const title = selectedMovie.original_title;
+  const rating = Math.floor(selectedMovie.vote_average * 10)/10;
+  const description = selectedMovie.overview;
+
+  const instance = basicLightbox.create(`
+  <div class='modal'>
+  <img class='modal-img' src="https://image.tmdb.org/t/p/w500${poster}" alt="${title}">
+  <h2>${title}</h2>
+  <h3>Film rating: ${rating}</h3>
+  <p>${description}</p>
+  </div>
+  `);
+
+  instance.show();
+}
