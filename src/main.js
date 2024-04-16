@@ -118,6 +118,8 @@ async function openCard(event) {
     return;
   }
 
+  console.log('ok');
+
   const movieCard = event.target.closest('.movie-card');
   const movieId = movieCard.dataset.id;
 
