@@ -12,7 +12,7 @@ import{a as g,b as h}from"./assets/vendor-3783c3cd.js";(function(){const o=docum
                     <span class='vote-average'>${Math.floor(t*10)/10}</span>
                 </div>
               </li>
-            `}).join("")}function L(r,o){r.forEach(async n=>{if(n.isIntersecting){d+=1;try{const s=await p(d);l.container.insertAdjacentHTML("beforeend",m(s.results)),s.page>=500&&o.unobserve(n.target)}catch(s){alert(s.message)}}})}async function M(r){if(r.target===r.currentTarget)return;console.log("ok");const n=r.target.closest(".movie-card").dataset.id,e=(await p(d)).results.find(i=>i.id===Number(n)),t=e.backdrop_path,a=e.original_title,u=Math.floor(e.vote_average*10)/10,f=e.overview;h.create(`
+            `}).join("")}function L(r,o){r.forEach(async n=>{if(n.isIntersecting){d+=1;try{const s=await p(d);l.container.insertAdjacentHTML("beforeend",m(s.results)),s.page>=500&&o.unobserve(n.target)}catch(s){alert(s.message)}}})}async function M(r){if(r.target===r.currentTarget)return;const n=r.target.closest(".movie-card").dataset.id,e=(await p(d)).results.find(i=>i.id===Number(n)),t=e.backdrop_path,a=e.original_title,u=Math.floor(e.vote_average*10)/10,f=e.overview;h.create(`
   <div class='modal'>
   <img class='modal-img' src="https://image.tmdb.org/t/p/w500${t}" alt="${a}">
   <h2>${a}</h2>
