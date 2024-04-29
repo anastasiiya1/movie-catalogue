@@ -15,7 +15,6 @@ const selectors = {
 selectors.container.addEventListener('click', openCard);
 
 let page = 1;
-let isModalOpen = false;
 
 let options = {
   root: null,
@@ -119,9 +118,6 @@ async function openCard(event) {
     return;
   }
 
-
-  console.log('ok');
-
   const movieCard = event.target.closest('.movie-card');
 
   const movieId = movieCard.dataset.id;
@@ -146,5 +142,4 @@ async function openCard(event) {
   `);
 
   instance.show();
-  isModalOpen = true;
 }
