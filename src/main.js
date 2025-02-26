@@ -1,6 +1,6 @@
 import axios from 'axios';
-import * as basicLightbox from "basiclightbox";
-import "basiclightbox/dist/basicLightbox.min.css";
+import * as basicLightbox from 'basiclightbox';
+import 'basiclightbox/dist/basicLightbox.min.css';
 
 const BASE_URL = 'https://api.themoviedb.org/3';
 const END_POINT = '/trending/movie/week';
@@ -31,7 +31,6 @@ fetchData(page)
       createMarkup(data.results)
     );
     console.log(data);
-
 
     if (data.page < 500) {
       observer.observe(selectors.guard);
@@ -114,7 +113,7 @@ function handlePagination(entries, observer) {
 }
 
 async function openCard(event) {
-  if(event.target === event.currentTarget){
+  if (event.target === event.currentTarget) {
     return;
   }
 
@@ -129,7 +128,7 @@ async function openCard(event) {
 
   const poster = selectedMovie.backdrop_path;
   const title = selectedMovie.original_title;
-  const rating = Math.floor(selectedMovie.vote_average * 10)/10;
+  const rating = Math.floor(selectedMovie.vote_average * 10) / 10;
   const description = selectedMovie.overview;
 
   const instance = basicLightbox.create(`
