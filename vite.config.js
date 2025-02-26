@@ -8,11 +8,14 @@ export default defineConfig(({ command }) => {
     define: {
       [command === 'serve' ? 'global' : '_global']: {},
     },
+    optimizeDeps: {
+      exclude: ['axios'],
+    },
     root: 'src',
     build: {
       sourcemap: true,
-
       rollupOptions: {
+        external: ['axios'],
         input: glob.sync('./src/*.html'),
         output: {
           manualChunks(id) {
