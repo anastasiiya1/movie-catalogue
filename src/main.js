@@ -30,7 +30,6 @@ fetchData(page)
       'beforeend',
       createMarkup(data.results)
     );
-    console.log(data);
 
     if (data.page < 500) {
       observer.observe(selectors.guard);
