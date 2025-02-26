@@ -5,7 +5,7 @@
   "type": "module",
   "scripts": {
     "dev": "vite",
-    "build": "vite build --base=/pagination/",
+    "build": "vite build --base=/movie-catalogue/",
     "preview": "vite preview"
   },
   "devDependencies": {
